@@ -2,13 +2,15 @@ import java.sql.*;
 import java.util.*;
 
 public class Connection {
+
+    private static final String DB_URL = ""
     public static void main(String[] args) {
         
         Connection conn = null;
         
         do{
             //enter oracle id and pass
-            string oracle_id, oracle_password;
+            String oracle_id, oracle_password;
             Scanner scan = new Scanner(System.in);
 
             System.out.println("Enter Oracle ID: ");
@@ -24,8 +26,16 @@ public class Connection {
                 System.err.println("Connection Failed.");
             }
         } while (conn == null);
+        
+        
+        System.out.println("Search student names by substring: ");
+        String sub = scan.nextline();
 
-        // here goes work
+        Statement s = conn.createStatement();
+        ResultSet rs = s.preparedStatement("select id, name from students where name like '%" + sub + "%'");
+
+        System.out.println("Enter Student ID: ");
+        int id = scan.nextInt();
 
         if(conn != null){
             try{
